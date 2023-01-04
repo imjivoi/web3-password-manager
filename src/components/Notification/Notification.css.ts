@@ -10,11 +10,11 @@ const notificationOverflow = style({
   width: '100%',
   height: '100%',
   pointerEvents: 'none',
-  display: 'flex',
-  alignItems: 'flex-end',
-  flexDirection: 'column',
+  display: 'inline-block',
+  // alignItems: 'flex-end',
+  // flexDirection: 'column',
   padding: vars.space.xlarge,
-  transition: 'all 0.5s',
+  transition: 'all 0.3s',
 })
 
 const notification = recipe({

@@ -11,9 +11,11 @@ export const baseColors = {
 } as const
 export const mainColors = {
   blue: '#3a86ff',
+  primary: '#3a86ff',
   red: '#ff006e',
   green: '#0FFF95',
   grey: '#eef0f2',
+  secondary: '#eef0f2',
   beige: '#252525',
 }
 type BaseColors = keyof typeof baseColors

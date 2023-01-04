@@ -14,7 +14,7 @@ interface ShowNotification extends Omit<Notification, 'id'> {
 export const useNotificationStore = defineStore('notification', {
   state: () => ({
     notifications: [] as Notification[],
-    limit: 10,
+    limit: 5,
   }),
   actions: {
     show({ type = 'neutral', content, timeout = 1000 }: ShowNotification) {

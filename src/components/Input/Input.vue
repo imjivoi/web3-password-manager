@@ -14,7 +14,11 @@
     </div>
   </div>
 </template>
-
+<script lang="ts">
+export default {
+  inheritAttrs: false
+}
+</script>
 <script lang="ts" setup>
 import { Size } from '../../styles/size';
 import { spaceSprinkles } from '../../styles/space.css'

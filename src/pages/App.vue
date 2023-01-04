@@ -23,25 +23,25 @@ const activeCategory = ref('All')
 
 const passwords = [
   {
-    id: 1,
+    id: '1',
     site: 'site',
     login: 'login',
     password: 'password'
   },
   {
-    id: 2,
+    id: '2',
     site: 'site',
     login: 'login',
     password: 'password'
   },
   {
-    id: 3,
+    id: '3',
     site: 'site',
     login: 'login',
     password: 'password'
   },
   {
-    id: 4,
+    id: '4',
     site: 'site',
     login: 'login',
     password: 'password'

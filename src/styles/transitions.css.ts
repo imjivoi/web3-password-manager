@@ -18,8 +18,12 @@ globalStyle('.fade-top-leave-to, .fade-top-enter-from', {
   transform: 'translateY(20px)',
 })
 
-globalStyle('.top-enter-active, .fade-top-leave-active', {
-  transition: 'all .5s',
+globalStyle('.top-enter-active, .top-leave-active, .top-move', {
+  transition: 'all .3s',
+})
+
+globalStyle('.top-leave-active', {
+  position: 'absolute',
 })
 
 globalStyle('.top-enter-from', {
@@ -28,5 +32,6 @@ globalStyle('.top-enter-from', {
 })
 
 globalStyle('.top-leave-to', {
+  opacity: 0,
   transform: 'translateY(-20px)',
 })

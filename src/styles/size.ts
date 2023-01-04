@@ -1,1 +1,1 @@
-export type Size = 'xsmall' | 'small' | 'medium' | 'large'
+export type Size = '2xsmall' | 'xsmall' | 'small' | 'medium' | 'large'

@@ -1,8 +1,10 @@
 import { createVar, keyframes, style } from '@vanilla-extract/css'
 import { recipe } from '@vanilla-extract/recipes'
 import { vars } from '../../styles/root.css'
+import { pxToRem } from '../../utils/px-to-rem'
 
 const buttonHoverColor = createVar()
+const buttonPadding = createVar()
 export default recipe({
   base: {
     position: 'relative',
@@ -14,6 +16,7 @@ export default recipe({
     alignItems: 'center',
     justifyContent: 'center',
     transition: 'all .3s',
+    padding: `0 ${buttonPadding}`,
     ':active': {
       opacity: 0.6,
     },
@@ -54,26 +57,48 @@ export default recipe({
       },
     },
     size: {
+      '2xsmall': {
+        fontSize: 12,
+        vars: {
+          [buttonPadding]: pxToRem(15),
+        },
+        height: 30,
+      },
+      xsmall: {
+        fontSize: 14,
+        vars: {
+          [buttonPadding]: pxToRem(20),
+        },
+        height: 35,
+      },
       small: {
         fontSize: 15,
-        padding: '0 30px',
+        vars: {
+          [buttonPadding]: pxToRem(30),
+        },
         height: '45px',
       },
       medium: {
         fontSize: 17,
-        padding: '0 40px',
+        vars: {
+          [buttonPadding]: pxToRem(40),
+        },
         height: '60px',
       },
       large: {
         fontSize: 18,
-        padding: '0 50px',
+        vars: {
+          [buttonPadding]: pxToRem(65),
+        },
         height: '65px',
       },
     },
     hasIcon: {
       true: {
-        background: 'transparent',
+        background: 'transparent !important',
         boxShadow: 'none',
+        padding: 0,
+        height: 'auto',
       },
     },
     text: {

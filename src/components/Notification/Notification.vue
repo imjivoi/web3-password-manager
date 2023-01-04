@@ -1,6 +1,6 @@
 <template>
   <div :class="notificationOverflow">
-    <transition-group name="top">
+    <transition-group name="top" mode="out-in">
       <div
         :class="notification({ type: item.type })"
         v-for="item in notifications"
@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue-demi'
+import { computed } from 'vue'
 import { useNotificationStore } from '../../store/notification'
 
 import { notification, notificationOverflow } from './Notification.css'
