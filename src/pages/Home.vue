@@ -3,23 +3,13 @@
     <div :class="centerCss">
       <div style="text-align: center">
         <div>
-          <Heading size="xlarge">Safety way to guard your data</Heading>
+          <Heading size="large">Safety way to guard your data</Heading>
         </div>
 
         <div :class="spaceSprinkles({ marginTop: 'large' })">
-          <Button
-            :class="spaceSprinkles({ marginX: 'auto' })"
-            @click="toApp"
-            v-if="!!walletStore.account.address"
-            >Go to app</Button
-          >
+          <Button :class="spaceSprinkles({ marginX: 'auto' })" @click="toApp" v-if="!!walletStore.account.address">Go to app</Button>
 
-          <Button
-            :class="spaceSprinkles({ marginX: 'auto' })"
-            @click="connect"
-            v-else
-            >Connect wallet</Button
-          >
+          <Button :class="spaceSprinkles({ marginX: 'auto' })" @click="connect" :loading="isWalletLoading" v-else>Connect wallet</Button>
         </div>
       </div>
     </div>
@@ -40,6 +30,8 @@ const walletStore = useWalletStore()
 const router = useRouter()
 
 const address = computed(() => walletStore.account.address)
+const isWalletLoading = computed(() => walletStore.isLoading)
 const connect = () => walletStore.connectWallet()
 const toApp = () => router.push('/app')
+
 </script>

@@ -14,6 +14,7 @@ const gridProperties = defineProperties({
   properties: {
     gridTemplateColumns: gridTemplateColumnsValues,
     gap: spacesValues,
+    placeItems: ['baseline', 'center', 'end'],
   },
 })
 

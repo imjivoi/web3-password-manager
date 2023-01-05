@@ -2,8 +2,8 @@
   <div :class="[grid, gridSprinkles({
   gridTemplateColumns: { desktop: `repeat(${columns}, 1fr)`, mobile: `repeat(1, 1fr)` }, gap: {
     desktop: spaces[gap], mobile: spaces.xsmall
-  }
-})]">
+    }, placeItems
+  })]">
     <slot />
   </div>
 </template>
@@ -21,6 +21,10 @@ const props = defineProps({
   gap: {
     type: String as unknown as PropType<typeof spacesKeys[number]>,
     default: 'small'
+  },
+  placeItems: {
+    type: String as PropType<'baseline' | 'center' | 'end'>,
+    default: 'baseline'
   }
 })
 

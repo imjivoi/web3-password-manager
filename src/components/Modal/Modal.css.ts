@@ -1,5 +1,6 @@
 import { style } from '@vanilla-extract/css'
 import { vars } from '../../styles/root.css'
+import { pxToRem } from '../../utils/px-to-rem'
 
 const modalOverflow = style({
   position: 'fixed',
@@ -24,20 +25,20 @@ const modalOverflow = style({
 })
 
 const modalBox = style({
-  background: vars.color.greyLight1,
-  padding: '30px 60px',
+  background: vars.theme.backgroundColorSecondary,
+  padding: `${pxToRem(30)} ${pxToRem(60)}`,
   borderRadius: 20,
-  minWidth: 300,
-  // width: '100%',
-  // height: '100%',
-  boxShadow: `${vars.color.grey} 0px 0.8px 3px, ${vars.color.grey} 0px 6px 14px`,
+  minWidth: pxToRem(300),
+  maxWidth: pxToRem(500),
+  width: '100%',
+  boxShadow: `${vars.theme.backgroundColorSecondary} 0px 0.8px 3px, ${vars.theme.backgroundColorSecondary} 0px 6px 14px`,
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
 })
 
 const modalContent = style({
-  maxWidth: 500,
+  width: '100%',
   margin: '0 auto',
 })
 

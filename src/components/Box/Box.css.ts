@@ -7,6 +7,6 @@ export default style({
   width: '100%',
   padding: vars.space.medium,
   borderRadius: 20,
-  background: vars.theme.textSecondary,
+  background: vars.theme.textColorSecondary,
   boxShadow: `0px 8px 24px ${vars.color.black}`,
 })

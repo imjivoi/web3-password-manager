@@ -1,4 +1,6 @@
+import { createSprinkles, defineProperties } from '@vanilla-extract/sprinkles'
 import { generateColors, RGBAToHex } from '../utils'
+import breakpoints from './breakpoints'
 
 // const colorsKeys
 
@@ -71,3 +73,14 @@ export const colors = { ...baseColors, ...themeColors } as Record<
   ColorType,
   string
 >
+
+const colorProperties = defineProperties({
+  conditions: breakpoints,
+  defaultCondition: 'mobile',
+  properties: {
+    color: colors,
+    background: colors,
+  },
+})
+
+export const colorSprinkles = createSprinkles(colorProperties)

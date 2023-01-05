@@ -1,5 +1,5 @@
 import { globalStyle, keyframes } from '@vanilla-extract/css'
-import { colors } from './colors'
+import { colors } from './colors.css'
 import { vars } from './root.css'
 import { toRgba } from '../utils/to-rgba'
 
@@ -38,9 +38,9 @@ globalStyle('a', {
 
 globalStyle('body', {
   height: '100vh',
-  color: vars.theme.textPrimary,
+  color: vars.theme.textColorPrimary,
   scrollbarColor: `${vars.color.blue} transparent`,
-  background: vars.theme.backgroundPrimary,
+  background: vars.theme.backgroundColorPrimary,
 })
 
 globalStyle('h1,h2,h3,p', {
@@ -61,4 +61,15 @@ globalStyle('::-webkit-scrollbar-thumb', {
   borderRadius: 30,
   minHeight: 100,
   border: '6px solid rgba(0, 0, 0, 0)',
+})
+
+globalStyle('ul', {
+  listStyle: 'none',
+  padding: 0,
+  margin: 0,
+})
+
+globalStyle(`i > svg`, {
+  width: '100%',
+  height: 'auto',
 })

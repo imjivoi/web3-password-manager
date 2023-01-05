@@ -6,13 +6,16 @@ import { pxToRem } from '../../utils/px-to-rem'
 
 const inputBase = style({
   outline: 'none',
-  border: 'none',
+  border: `1px solid transparent`,
   borderRadius: 10,
   fontWeight: 400,
   fontSize: 16,
   width: '100%',
   background: 'transparent',
   color: 'unset',
+  ':focus': {
+    border: `1px solid ${vars.theme.colorPrimary}`,
+  },
 })
 
 const input = recipe({

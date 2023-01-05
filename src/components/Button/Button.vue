@@ -12,8 +12,8 @@
 <script lang="ts" setup>
 import { Icon, Loader } from '@/components'
 
-import { computed } from 'vue'
-import { ColorType } from '../../styles/colors'
+import { computed, useSlots } from 'vue'
+import { ColorType } from '../../styles/colors.css'
 import buttonCss, { buttonGradientBorder } from './Button.css'
 import { Size } from '../../styles/size';
 
@@ -22,7 +22,7 @@ type ButtonWidthType = 'auto' | 'full'
 type ButtonSizeType = Size | '2xsmall'
 
 interface Props {
-  type?: ButtonColorType
+  variant?: ButtonColorType
   width?: ButtonWidthType
   size?: ButtonSizeType
   icon?: string
@@ -33,7 +33,7 @@ interface Props {
 }
 
 const {
-  type = 'primary',
+  variant = 'primary',
   width = 'auto',
   size = 'medium',
   icon,
@@ -43,8 +43,10 @@ const {
   loading
 } = defineProps<Props>()
 
+const slots = useSlots()
+
 const styles = computed(() =>
-  buttonCss({ color: type, width, size, hasIcon: !!icon, text, border })
+  buttonCss({ variant, width, size, isIcon: !!icon && !slots.default, text, border })
 )
 </script>
 

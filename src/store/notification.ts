@@ -17,7 +17,7 @@ export const useNotificationStore = defineStore('notification', {
     limit: 5,
   }),
   actions: {
-    show({ type = 'neutral', content, timeout = 1000 }: ShowNotification) {
+    show({ type = 'neutral', content, timeout = 2000 }: ShowNotification) {
       if (this.notifications.length === this.limit) return
       const id = randomId()
       this.notifications.push({ type, content, id })

@@ -2,50 +2,44 @@ import { createVar, keyframes, style } from '@vanilla-extract/css'
 import { recipe } from '@vanilla-extract/recipes'
 import { vars } from '../../styles/root.css'
 import { pxToRem } from '../../utils/px-to-rem'
+import { resetBtn } from '../../styles/reset.css'
 
-const buttonHoverColor = createVar()
 const buttonPadding = createVar()
 export default recipe({
-  base: {
-    position: 'relative',
-    outline: 'none',
-    border: `none`,
-    fontWeight: 500,
-    cursor: 'pointer',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    transition: 'all .3s',
-    padding: `0 ${buttonPadding}`,
-    ':active': {
-      opacity: 0.6,
+  base: [
+    resetBtn,
+    {
+      position: 'relative',
+      fontWeight: 500,
+      cursor: 'pointer',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      transition: 'all .3s',
+      padding: `0 ${buttonPadding}`,
+      ':active': {
+        opacity: 0.7,
+      },
+      ':hover': {
+        opacity: 0.8,
+      },
+      ':disabled': {
+        cursor: 'not-allowed',
+      },
     },
-    ':hover': {
-      background: buttonHoverColor,
-    },
-    ':disabled': {
-      cursor: 'not-allowed',
-    },
-  },
+  ],
   variants: {
-    color: {
+    variant: {
       primary: {
-        background: vars.color.blue,
+        background: `linear-gradient(90deg,${vars.color.blue},${vars.color.purple})  `,
         color: vars.color.grey,
         // boxShadow: `${vars.color.blueLight2} 0px 0.8px 3px, ${vars.color.blueLight2} 0px 4px 14px`,
-        vars: {
-          [buttonHoverColor]: vars.color.blueLight1,
-        },
-
         selectors: {},
       },
       secondary: {
-        color: vars.color.blue,
-        background: vars.color.grey,
+        color: vars.theme.colorPrimary,
+        background: vars.theme.colorSecondary,
         // boxShadow: `${vars.color.greyLight4} 0px 0.8px 3px, ${vars.color.greyLight4} 0px 4px 14px`,
-        vars: {
-          [buttonHoverColor]: vars.color.greyLight1,
-        },
       },
     },
     width: {
@@ -93,7 +87,7 @@ export default recipe({
         height: '65px',
       },
     },
-    hasIcon: {
+    isIcon: {
       true: {
         background: 'transparent !important',
         boxShadow: 'none',
@@ -119,7 +113,7 @@ export default recipe({
     },
   },
   defaultVariants: {
-    color: 'primary',
+    variant: 'primary',
     width: 'auto',
     size: 'medium',
     border: 'pill',

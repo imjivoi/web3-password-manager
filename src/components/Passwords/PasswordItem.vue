@@ -5,11 +5,11 @@
       <div :class="[flexSprinkles({ display: 'flex', flexDirection: 'column' }), spaceSprinkles({ marginTop: 'xsmall', gap: '2xsmall' })]">
         <div :class="flexSprinkles({ display: 'flex', justifyContent: 'space-between' })">
           <Input disabled size="small" type="password" :model-value="login" />
-          <Button icon="copy-outline" size="2xsmall" icon-color="purple" @click="copy(login)" />
+          <Button icon="copy-outline" size="2xsmall" icon-color="primary" @click="copy(login)" />
         </div>
         <div :class="flexSprinkles({ display: 'flex', justifyContent: 'space-between' })">
           <Input disabled size="small" type="password" :model-value="password" />
-          <Button icon="copy-outline" size="2xsmall" icon-color="purple" @click="copy(password)" />
+          <Button icon="copy-outline" size="2xsmall" icon-color="primary" @click="copy(password)" />
         </div>
         </div>
     </div>

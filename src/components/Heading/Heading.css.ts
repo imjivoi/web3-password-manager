@@ -2,7 +2,7 @@ import { recipe } from '@vanilla-extract/recipes'
 import { vars } from '../../styles/root.css'
 
 export const headingCss = recipe({
-  base: { fontWeight: 500, marginBottom: vars.space.small },
+  base: { fontWeight: 500 },
   variants: {
     size: {
       small: { fontSize: '20px' },

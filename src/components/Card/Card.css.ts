@@ -8,6 +8,6 @@ export const card = style({
   minHeight: pxToRem(100),
   width: '100%',
   borderRadius: 15,
-  backgroundColor: vars.theme.backgroundSecondary,
-  padding: `${pxToRem(15)} ${pxToRem(20)}`
+  backgroundColor: vars.theme.backgroundColorSecondary,
+  padding: `${pxToRem(15)} ${pxToRem(20)}`,
 })

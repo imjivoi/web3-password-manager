@@ -17,27 +17,27 @@ const icon = recipe({
     size: {
       '2xsmall': {
         vars: {
-          [iconSize]: pxToRem(30),
+          [iconSize]: pxToRem(25),
         },
       },
       xsmall: {
         vars: {
-          [iconSize]: pxToRem(35),
+          [iconSize]: pxToRem(30),
         },
       },
       small: {
         vars: {
-          [iconSize]: pxToRem(45),
+          [iconSize]: pxToRem(35),
         },
       },
       medium: {
         vars: {
-          [iconSize]: pxToRem(60),
+          [iconSize]: pxToRem(45),
         },
       },
       large: {
         vars: {
-          [iconSize]: pxToRem(65),
+          [iconSize]: pxToRem(50),
         },
       },
     },
@@ -47,8 +47,5 @@ const icon = recipe({
   },
 })
 
-globalStyle(`${icon} > svg`, {
-  height: '100%',
-})
 
 export { icon }

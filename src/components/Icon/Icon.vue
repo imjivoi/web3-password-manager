@@ -11,7 +11,7 @@
 import { icon } from './Icon.css'
 
 import { computed, onMounted, PropType, ref } from 'vue'
-import { ColorType, colors } from '../../styles/colors'
+import { ColorType, colors } from '../../styles/colors.css'
 import { Size } from '../../styles/size'
 
 const props = defineProps({

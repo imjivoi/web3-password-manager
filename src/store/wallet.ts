@@ -3,45 +3,32 @@ import { defineStore } from 'pinia'
 import { markRaw } from 'vue'
 import { useMainStore } from './main'
 import { useNotificationStore } from './notification'
-interface Balances {
-  luna: string
-  ust: string
-  usd: string
-}
+import Wallet from '../services/wallet'
 export const useWalletStore = defineStore('wallet', {
   state: () => ({
     isLoading: false,
     provider: {} as providers.Web3Provider,
     signer: {},
-    account: { address: '', balance: '' },
+    address: '',
+    balance: '',
   }),
   actions: {
-    async setAccount(address: string) {
-      const balance = await this.provider.getBalance(address)
-
-      const formattedBalance = ethers.utils.formatEther(balance)
-
-      this.account = { address, balance: formattedBalance }
+    setAddress(address: string) {
+      this.address = address
+    },
+    setBalance(balance: string) {
+      this.balance = balance
     },
     async connectWallet() {
       const notification = useNotificationStore()
       try {
         this.isLoading = true
-        const { ethereum } = window
 
-        if (ethereum) {
-          this.provider = markRaw(new ethers.providers.Web3Provider(ethereum))
-          await this.provider.send('eth_requestAccounts', [])
-          this.signer = this.provider.getSigner()
-          const accounts = await this.provider.listAccounts()
-          if (accounts.length > 0) {
-            await this.setAccount(accounts[0])
-          }
-        } else {
-          notification.show({
-            content: 'For use this app you need to install metamask',
-            type: 'warning',
-          })
+        const accounts = await Wallet.getAccounts()
+        if (accounts.length > 0) {
+          const balanceData = await Wallet.getBalance(accounts[0])
+          this.setAddress(accounts[0])
+          this.setBalance(balanceData.balance)
         }
       } catch (error) {
         notification.show({
@@ -51,6 +38,11 @@ export const useWalletStore = defineStore('wallet', {
       } finally {
         this.isLoading = false
       }
+    },
+  },
+  getters: {
+    isLogged(): boolean {
+      return !!this.account.address
     },
   },
 })
