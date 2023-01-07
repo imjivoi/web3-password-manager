@@ -1,18 +1,7 @@
 import { ethers, providers } from 'ethers'
+import { Web3Instance } from './web3-instance'
 
-class Wallet {
-  private _provider: providers.Web3Provider
-  private _signer: providers.JsonRpcSigner
-
-  constructor() {
-    const { ethereum } = window
-    if (!ethereum) {
-      throw new Error('Metamask missing')
-    }
-    this._provider = new ethers.providers.Web3Provider(ethereum)
-    this._signer = this._provider.getSigner()
-  }
-
+class Wallet extends Web3Instance {
   async getAccounts() {
     await this._provider.send('eth_requestAccounts', [])
     const accounts = await this._provider.listAccounts()
@@ -26,6 +15,10 @@ class Wallet {
     return {
       balance: formattedBalance,
     }
+  }
+
+  loadWalletByMnemonic(mnemonic: string) {
+    return ethers.Wallet.fromMnemonic(mnemonic)
   }
 }
 

@@ -99,7 +99,8 @@ export default recipe({
       true: {
         background: 'transparent',
         boxShadow: 'none',
-        color: vars.color.black,
+        color: vars.theme.textColorPrimary,
+        textDecoration: 'underline',
         padding: 0,
       },
     },

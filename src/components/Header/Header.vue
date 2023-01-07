@@ -7,7 +7,7 @@
           shortAddress(address)
         }}</Button>
 
-        <Button size="small" @click="openModalConnect" v-else>Connect wallet</Button>
+        <Button size="small" @click="openModalPassphrase" v-else>Load wallet</Button>
       </div>
       <Switch v-model="mainStore.isDark">
         <Icon name="moon" color="yellow" />
@@ -31,7 +31,7 @@ import shortAddress from '@/utils/short-address'
 import { useNotificationStore } from '../../store/notification'
 import { useMainStore } from '../../store/main'
 import { useModal } from '../../store/modal'
-import ModalConnect from '../Modal/ModalConnect.vue'
+import ModalPassphrase from '../Modal/ModalPassphrase.vue'
 
 const walletStore = useWalletStore()
 const notification = useNotificationStore()
@@ -44,7 +44,7 @@ const copy = async () => {
   notification.show({ content: 'Address copied', type: 'success' })
 }
 
-const openModalConnect = () => {
-  modal.open(ModalConnect)
+const openModalPassphrase = () => {
+  modal.open(ModalPassphrase)
 }
 </script>

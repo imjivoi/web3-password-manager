@@ -4,7 +4,7 @@
       <div :class="modalOverflow" @click.self="modal.close" v-if="isOpen">
         <div :class="modalBox">
           <div :class="modalContent">
-            <component :is="view" v-bind="props" />
+            <component :is="view" v-bind="props" @close="modal.close" />
           </div>
         </div>
       </div>

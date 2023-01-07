@@ -34,5 +34,8 @@ const toggleTheme = () => {
 }
 
 watch(isDark, (val) => toggleTheme())
-onMounted(() => toggleTheme())
+onMounted(() => {
+  toggleTheme()
+
+})
 </script>

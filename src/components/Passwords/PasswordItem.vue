@@ -23,7 +23,7 @@ import { flexSprinkles } from '../../styles/flex.css'
 
 import { spaceSprinkles } from '../../styles/space.css'
 import { passwordItem, header, itemData } from './Passwords.css'
-import { IPassword } from '../../types/password';
+import { IPassword } from '../../types/account';
 import { useNotificationStore } from '../../store/notification';
 
 interface Props {

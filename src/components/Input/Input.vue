@@ -24,7 +24,7 @@ import { Size } from '../../styles/size';
 import { spaceSprinkles } from '../../styles/space.css'
 import { input, message, inputContainer } from './Input.css'
 
-type InputType = Exclude<Size, 'xsmall' | 'large'>
+type InputType = Exclude<Size, '2xsmall' | 'xsmall' | 'large'>
 
 interface Props {
   placeholder?: string

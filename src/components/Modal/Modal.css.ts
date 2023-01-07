@@ -19,8 +19,9 @@ const modalOverflow = style({
     top: 0,
     width: '100%',
     height: '100%',
-    // backdropFilter: 'blur(20px)',
+    backdropFilter: 'blur(5px)',
     zIndex: '-1',
+    transition: 'all .3s',
   },
 })
 

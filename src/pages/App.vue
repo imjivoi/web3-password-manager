@@ -2,7 +2,7 @@
   <div :class="section">
     <template v-if="true">
       <div :class="[spaceSprinkles({ marginBottom: 'large' }), flexSprinkles({ display: 'flex', alignItems: 'center' })]">
-        <Heading :class="spaceSprinkles({ marginRight: 'small', marginBottom: 'none' })">Passwords</Heading> <Button border="round" variant="secondary" size="small" icon="plus-outline" @click="add">Add new</Button>
+        <Heading :class="spaceSprinkles({ marginRight: 'small', marginBottom: 'none' })">Passwords</Heading> <Button border="round" variant="secondary" size="small" icon="plus-outline" @click="add">Add new</Button><Button border="round" variant="secondary" size="small" @click="getAll">Get all</Button>
       </div>
       <Grid>
         <PasswordItem v-for="password in passwords" :password="password" :key="password.id" />
@@ -27,10 +27,11 @@ import { centerCss } from '../styles/common.css'
 import { flexSprinkles } from '../styles/flex.css'
 import { spaceSprinkles } from '../styles/space.css'
 import { passwordsContainer } from '@/components/Passwords/Passwords.css'
-
+import PasswordManager from '../services/password-manager'
 import { ref } from 'vue'
 import { useModal } from '../store/modal'
 import ModalAdd from '../components/Modal/ModalAdd.vue'
+
 
 const categories = ['All', 'Passwords', 'Notes']
 
@@ -71,5 +72,10 @@ const add = () => {
       console.log('success cb');
     }
   })
+}
+
+const getAll = async () => {
+  const result = await PasswordManager.getAll()
+  console.log(result)
 }
 </script>
