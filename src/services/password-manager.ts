@@ -56,7 +56,6 @@ class PasswordManager extends Web3Instance {
     const result = {} as Account
     accountKeys.forEach((key) => {
       const value = accountData[key]
-      console.log(value)
       try {
         if (key === 'id') {
           result[key] = String(
