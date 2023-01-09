@@ -7,7 +7,7 @@ import {
   accountKeysWithoutId,
 } from '../types/account'
 import { Web3Instance } from './web3-instance'
-import { decryptWithAES, encryptWithAES } from './crypto'
+import { decryptWithAES, encryptWithAES, hash } from './crypto'
 
 class PasswordManager extends Web3Instance {
   private _contract: Contract
@@ -19,7 +19,7 @@ class PasswordManager extends Web3Instance {
       contractInfo.abi,
       this._signer
     )
-    this._privateKey = sessionStorage.getItem('key') as string
+    this._privateKey = hash(sessionStorage.getItem('key') as string)
   }
 
   async add(newAccount: AccountWithoutId) {

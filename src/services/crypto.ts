@@ -9,3 +9,5 @@ export const decryptWithAES = (encryptedData: string, key: string) => {
   const originalText = bytes.toString(cryptoJs.enc.Utf8)
   return originalText
 }
+
+export const hash = (data: string) => cryptoJs.SHA256(data).toString()

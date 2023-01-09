@@ -4,19 +4,28 @@ import { markRaw } from 'vue'
 import { useMainStore } from './main'
 import { useNotificationStore } from './notification'
 import Wallet from '../services/wallet'
-import { HmacSHA256, SHA256 } from 'crypto-js'
+
 export const useWalletStore = defineStore('wallet', {
   state: () => ({
     isLoading: false,
     address: '',
-    privateKeyHash: '',
+    privateKey: '',
     balance: '',
   }),
   actions: {
-    setPrivateKeyHash(privateKey: string) {
-      const hashedKey = SHA256(privateKey).toString()
-      this.privateKeyHash = hashedKey
-      sessionStorage.setItem('key', hashedKey)
+    setWalletData({
+      address,
+      privateKey,
+    }: {
+      address: string
+      privateKey: string
+    }) {
+      this.setAddress(address)
+      this.setPrivateKey(privateKey)
+    },
+    setPrivateKey(privateKey: string) {
+      this.privateKey = privateKey
+      sessionStorage.setItem('key', privateKey)
     },
     setAddress(address: string) {
       this.address = address

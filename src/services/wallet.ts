@@ -1,4 +1,4 @@
-import { ethers, providers } from 'ethers'
+import { ethers, Wallet as EthersWallet } from 'ethers'
 import { Web3Instance } from './web3-instance'
 
 class Wallet extends Web3Instance {
@@ -19,6 +19,14 @@ class Wallet extends Web3Instance {
 
   loadWalletByMnemonic(mnemonic: string) {
     return ethers.Wallet.fromMnemonic(mnemonic)
+  }
+
+  encryptWalletWithPassword(wallet: EthersWallet, password: string) {
+    return wallet.encrypt(password)
+  }
+
+  decryptWalletWithPassword(json: string, password: string) {
+    return ethers.Wallet.fromEncryptedJson(json, password)
   }
 }
 
