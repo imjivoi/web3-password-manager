@@ -4,7 +4,8 @@
 
 ### TODO
 
-- [ ] Implement password auth
+- [x] Implement password auth
+- [ ] Persist authentication
 - [ ] Add project description
-- [ ] Router guard
+- [x] Router guard
 - [ ] Finish ui crud

@@ -29,7 +29,7 @@ export default defineConfig({
   server: {
     hmr: true,
     watch: {
-      usePolling: true,
+      usePolling: process.platform !== 'win32',
     },
   },
 })

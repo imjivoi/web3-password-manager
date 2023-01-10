@@ -65,7 +65,7 @@ import { spaceSprinkles } from '../../styles/space.css';
 import Form from '../Form/Form.vue';
 import Input from '../Input/Input.vue';
 import Button from '../Button/Button.vue';
-import { ref, watch } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import Wallet from '../../services/wallet';
 import { useWalletStore } from '../../store/wallet';
 import { Wallet as EthersWallet } from 'ethers';
@@ -106,14 +106,20 @@ const saveWithPassword = async () => {
     try {
         const json = await Wallet.encryptWalletWithPassword(wallet.value, password.value)
         Storage.set('json', json)
-        setWalletData({ address: wallet.value.address, privateKey: wallet.value.privateKey })
-        props.successCallback()
+        props.successCallback(wallet.value)
     } catch (error) {
         errorMessage.value = error.message
     } finally {
         setGlobalLoading(false)
     }
 }
+
+onMounted(() => {
+    const json = Storage.get('json')
+    if (json) {
+        currentStep.value = Steps.Password
+    }
+})
 
 watch(passphrase, () => {
     errorMessage.value = ''

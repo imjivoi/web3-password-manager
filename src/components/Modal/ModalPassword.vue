@@ -1,100 +1,77 @@
 <template>
-  <Modal
-    :model-value="modelValue"
-    @update:modelValue="$emit('update:modelValue', false)"
-    :width="800"
-  >
-    <Heading size="medium" position="center">Enter your password</Heading>
+  <Heading size="medium" position="center">Enter your password</Heading>
 
-    <div :class="spaceSprinkles({ marginTop: 'medium' })">
-      <Skeleton width="100%" height="80px" v-if="isLoading" />
-
-      <template v-else>
-        <Text
-          weight="accent"
-          size="xlarge"
-          :class="spaceSprinkles({ marginY: 'xsmall' })"
-          >Enter your password</Text
-        >
-        <Form>
-          <template #inputs>
-            <Input placeholder="Password" type="password" v-model="password" />
-          </template>
-          <template #footer>
-            <div
-              :class="
-                flexSprinkles({
-                  display: {
-                    tablet: 'flex',
-                    mobile: 'block',
-                  },
-                })
-              "
-            >
-              <div
-                :class="
-                  spaceSprinkles({
-                    marginRight: {
-                      tablet: 'small',
-                      mobile: 'none',
-                    },
-                    marginBottom: {
-                      tablet: 'none',
-                      mobile: 'small',
-                    },
-                  })
-                "
-              >
-                <Button @click="enter">Enter</Button>
-              </div>
-            </div>
-          </template>
-        </Form>
+  <div :class="spaceSprinkles({ marginTop: 'medium' })">
+    <Form>
+      <template #inputs>
+        <Input :status="errorMessage ? 'error' : 'neutral'" placeholder="Password" type="password" v-model="password">
+        <template #message v-if="errorMessage">
+          {{ errorMessage }}
+        </template>
+        </Input>
       </template>
-    </div>
-  </Modal>
+      <template #footer>
+        <div :class="
+          flexSprinkles({
+            display: {
+              tablet: 'flex',
+              mobile: 'block',
+            },
+            justifyContent: 'center'
+          })
+        ">
+          <div>
+            <Button size="small" @click="enter">Enter</Button>
+          </div>
+        </div>
+      </template>
+    </Form>
+  </div>
 </template>
 
 <script lang="ts" setup>
 import Text from '../Text/Text.vue'
 import Heading from '../Heading/Heading.vue'
 import Modal from './Modal.vue'
-import Textarea from '../Textarea/Textarea.vue'
 import Input from '../Input/Input.vue'
 import Form from '../Form/Form.vue'
 import Button from '../Button/Button.vue'
-import Skeleton from '../Skeleton/Skeleton.vue'
 
 import { spaceSprinkles } from '../../styles/space.css'
 import { flexSprinkles } from '../../styles/flex.css'
 
 import { computed, onMounted, ref, watch } from 'vue'
-import Wallet from '../../modules/Wallet'
-import { useMainStore } from '../../store/main'
 import { useWalletStore } from '../../store/wallet'
-import { decrypt } from '../../utils/crypto'
 import { useRouter } from 'vue-router'
+import Wallet from '../../services/wallet'
+import Storage from '../../services/storage'
+import { useMainStore } from '../../store/main'
 
 const props = defineProps({
-  modelValue: {
-    type: Boolean,
-    default: false,
-  },
+    successCallback: {
+        type: Function,
+        default: () => { }
+    }
 })
 
 const walletStore = useWalletStore()
-const isLoading = ref(false)
-const password = ref('')
+const mainStore = useMainStore()
 const router = useRouter()
 
+const password = ref('')
+const errorMessage = ref('')
+
 const enter = async () => {
-  if (!password) return
+  if (!password.value) return
+  mainStore.setGlobalLoading(true, 'Loading wallet...')
   try {
-    const wallet = await Wallet.getByPassword(password.value)
-    walletStore.setWallet(wallet)
-    router.push('/wallet')
+    const json = Storage.get('json') as string
+    const wallet = await Wallet.decryptWalletWithPassword(json, password.value)
+    props.successCallback(wallet)
   } catch (error) {
-    console.log('Incorrect password')
+    errorMessage.value = error.message
+  } finally {
+    mainStore.setGlobalLoading(false)
   }
 }
 </script>
