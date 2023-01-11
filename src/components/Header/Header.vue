@@ -9,7 +9,7 @@
 
         <Button size="small" @click="openModalPassphrase" v-else>Load wallet</Button>
       </div>
-      <Switch v-model="mainStore.isDark">
+      <Switch v-model="isDarkTheme">
         <Icon name="moon" color="yellow" />
         <Icon name="sun-outline" color="yellow" />
       </Switch>
@@ -43,6 +43,19 @@ const copy = async () => {
   await navigator.clipboard.writeText(address.value)
   notification.show({ content: 'Address copied', type: 'success' })
 }
+
+const isDarkTheme = computed({
+  get() {
+    return mainStore.isDarkTheme
+  },
+  set(val: boolean) {
+    if (val) {
+      mainStore.setTheme('dark')
+    } else {
+      mainStore.setTheme('light')
+    }
+  }
+})
 
 const openModalPassphrase = () => {
   modal.open(ModalPassphrase)
