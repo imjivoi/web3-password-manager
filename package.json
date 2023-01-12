@@ -9,12 +9,6 @@
   },
   "dependencies": {
     "@element-plus/colors": "^0.0.1-beta.7",
-    "@esbuild-plugins/node-globals-polyfill": "^0.1.1",
-    "@vanilla-extract/css": "^1.7.0",
-    "@vanilla-extract/dynamic": "^2.0.3",
-    "@vanilla-extract/recipes": "^0.2.4",
-    "@vanilla-extract/sprinkles": "^1.4.1",
-    "@vanilla-extract/vite-plugin": "^3.1.6",
     "@vuelidate/core": "^2.0.0",
     "@vuelidate/validators": "^2.0.0",
     "crypto-js": "^4.1.1",
@@ -26,9 +20,14 @@
   },
   "devDependencies": {
     "@types/crypto-js": "^4.1.1",
-    "@vitejs/plugin-vue": "^2.3.3",
+    "@vanilla-extract/css": "^1.9.2",
+    "@vanilla-extract/dynamic": "^2.0.3",
+    "@vanilla-extract/recipes": "^0.3.0",
+    "@vanilla-extract/sprinkles": "^1.5.1",
+    "@vanilla-extract/vite-plugin": "^3.7.0",
+    "@vitejs/plugin-vue": "^4.0.0",
     "typescript": "^4.5.4",
-    "vite": "^2.9.9",
+    "vite": "^4.0.4",
     "vite-svg-loader": "^3.3.0",
     "vue-tsc": "^0.34.7"
   }
