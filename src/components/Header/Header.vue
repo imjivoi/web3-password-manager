@@ -7,7 +7,7 @@
           shortAddress(address)
         }}</Button>
 
-        <Button size="small" @click="openModalPassphrase" v-else>Load wallet</Button>
+        <Button size="small" @click="open" v-else>Load wallet</Button>
       </div>
       <Switch v-model="isDarkTheme">
         <Icon name="moon" color="yellow" />
@@ -31,12 +31,12 @@ import shortAddress from '@/utils/short-address'
 import { useNotificationStore } from '../../store/notification'
 import { useMainStore } from '../../store/main'
 import { useModal } from '../../store/modal'
-import ModalPassphrase from '../Modal/ModalPassphrase.vue'
+import { useLoadWallet } from '../../composable/useLoadWallet'
 
 const walletStore = useWalletStore()
 const notification = useNotificationStore()
 const mainStore = useMainStore()
-const modal = useModal()
+const { open } = useLoadWallet()
 
 const address = computed(() => walletStore.address)
 const copy = async () => {
@@ -57,7 +57,5 @@ const isDarkTheme = computed({
   }
 })
 
-const openModalPassphrase = () => {
-  modal.open(ModalPassphrase)
-}
+
 </script>

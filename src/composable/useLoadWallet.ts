@@ -4,6 +4,7 @@ import Storage from '../services/storage'
 import { useModal } from '../store/modal'
 import { useWalletStore } from '../store/wallet'
 import { useRouter } from 'vue-router'
+import { Wallet } from 'ethers'
 export const useLoadWallet = () => {
   const router = useRouter()
   const modal = useModal()
@@ -11,7 +12,7 @@ export const useLoadWallet = () => {
 
   const json = Storage.get('json')
 
-  const successCallback = (wallet) => {
+  const successCallback = (wallet: Wallet) => {
     walletStore.setWalletData({
       address: wallet.address,
       privateKey: wallet.privateKey,

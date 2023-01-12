@@ -12,10 +12,7 @@
             <template #footer>
                 <div :class="
                     flexSprinkles({
-                        display: {
-                            tablet: 'flex',
-                            mobile: 'block',
-                        },
+                        display: 'flex',
                         justifyContent: 'center'
                     })
                 ">

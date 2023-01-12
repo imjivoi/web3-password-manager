@@ -17,6 +17,7 @@ export default recipe({
       justifyContent: 'center',
       transition: 'all .3s',
       padding: `0 ${buttonPadding}`,
+      userSelect: 'none',
       ':active': {
         opacity: 0.7,
       },
@@ -52,39 +53,39 @@ export default recipe({
     },
     size: {
       '2xsmall': {
-        fontSize: 12,
+        fontSize: pxToRem(12),
         vars: {
           [buttonPadding]: pxToRem(15),
         },
-        height: 30,
+        height: pxToRem(30),
       },
       xsmall: {
-        fontSize: 14,
+        fontSize: pxToRem(14),
         vars: {
           [buttonPadding]: pxToRem(20),
         },
-        height: 35,
+        height: pxToRem(35),
       },
       small: {
-        fontSize: 15,
+        fontSize: pxToRem(15),
         vars: {
           [buttonPadding]: pxToRem(30),
         },
-        height: '45px',
+        height: pxToRem(45),
       },
       medium: {
-        fontSize: 17,
+        fontSize: pxToRem(17),
         vars: {
           [buttonPadding]: pxToRem(40),
         },
-        height: '60px',
+        height: pxToRem(60),
       },
       large: {
-        fontSize: 18,
+        fontSize: pxToRem(18),
         vars: {
           [buttonPadding]: pxToRem(65),
         },
-        height: '65px',
+        height: pxToRem(65),
       },
     },
     isIcon: {
