@@ -1,4 +1,4 @@
-import { Contract, utils } from 'ethers'
+import { Contract, utils, BigNumber } from 'ethers'
 import contractInfo from '../contract'
 import {
   Account,
@@ -32,14 +32,16 @@ class PasswordManager extends Web3Instance {
   }
   update() {}
   delete(id: string) {
-    return this._contract.deleteAccount(utils.parseEther(id))
+    return this._contract.deleteAccount(BigNumber.from(id))
   }
   async getAll() {
     const accounts: Account[] = await this._contract.allAccounts()
-
-    return accounts.map((account) => {
-      return this._decryptAccount(account)
-    })
+    return accounts
+      .map((account) => {
+        if (account.id === '0') return
+        return this._decryptAccount(account)
+      })
+      .filter(Boolean)
   }
   getById() {}
 

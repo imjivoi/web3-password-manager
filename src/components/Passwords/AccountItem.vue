@@ -1,7 +1,10 @@
 <template>
   <Card>
     <div :class="flexSprinkles({ display: 'flex', flexDirection: 'column' })">
-      <span :class="header">{{ site }}</span>
+      <div :class="flexSprinkles({ display: 'flex', justifyContent: 'space-between' })">
+        <span :class="header">{{ siteName }}</span>
+        <Button icon="trash-outline" size="2xsmall" icon-color="red" @click="$emit('remove', id)" />
+      </div>
       <div :class="[flexSprinkles({ display: 'flex', flexDirection: 'column' }), spaceSprinkles({ marginTop: 'xsmall', gap: '2xsmall' })]">
         <div :class="flexSprinkles({ display: 'flex', justifyContent: 'space-between' })">
           <Input disabled size="small" type="password" :model-value="login" />
@@ -11,7 +14,7 @@
           <Input disabled size="small" type="password" :model-value="password" />
           <Button icon="copy-outline" size="2xsmall" icon-color="primary" @click="copy(password)" />
         </div>
-        </div>
+      </div>
     </div>
   </Card>
 </template>
@@ -23,20 +26,24 @@ import { flexSprinkles } from '../../styles/flex.css'
 
 import { spaceSprinkles } from '../../styles/space.css'
 import { passwordItem, header, itemData } from './Passwords.css'
-import { IPassword } from '../../types/account';
+import { Account } from '../../types/account';
 import { useNotificationStore } from '../../store/notification';
 
 interface Props {
-  password: IPassword
+  account: Account
 }
+
+const emits = defineEmits(['remove'])
 
 const notification = useNotificationStore()
 
 const props = defineProps<Props>()
-const { site, login, id, password } = props.password
+const { siteName, login, id, password } = props.account
 
 const copy = async (val: string) => {
   await navigator.clipboard.writeText(val)
   notification.show({ type: 'success', content: 'Copied!' })
 }
+
+
 </script>
