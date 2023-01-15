@@ -4,6 +4,7 @@ import Dropdown from './Dropdown/Dropdown.vue'
 import DropdownItem from './Dropdown/DropdownItem.vue'
 import Icon from './Icon/Icon.vue'
 import AccountItem from './Passwords/AccountItem.vue'
+import AccountItemLoading from './Passwords/AccountItemLoading.vue'
 import Header from './Header/Header.vue'
 import Switch from './Switch/Switch.vue'
 import Heading from './Heading/Heading.vue'
@@ -21,6 +22,7 @@ export {
   DropdownItem,
   Icon,
   AccountItem,
+  AccountItemLoading,
   Header,
   Switch,
   Heading,
@@ -29,5 +31,5 @@ export {
   Card,
   Grid,
   Loader,
-  Input
+  Input,
 }

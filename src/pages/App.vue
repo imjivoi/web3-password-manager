@@ -1,26 +1,27 @@
 <template>
   <div :class="section">
-    <template v-if="true">
-      <div :class="[spaceSprinkles({ marginBottom: 'large' }), flexSprinkles({ display: 'flex', alignItems: 'center' })]">
-        <Heading :class="spaceSprinkles({ marginRight: 'small', marginBottom: 'none' })">Accounts</Heading> <Button border="round" variant="secondary" size="small" icon="plus-outline" @click="add">Add new</Button><Button border="round" variant="secondary" size="small" @click="getAll">Get all</Button>
+    <div :class="[spaceSprinkles({ marginBottom: 'large' }), flexSprinkles({ display: 'flex', alignItems: 'center' })]">
+      <Heading :class="spaceSprinkles({ marginRight: 'medium', marginBottom: 'none' })">Accounts</Heading>
+      <div :class="[flexSprinkles({ display: { tablet: 'flex' } }), spaceSprinkles({ gap: 'xsmall' })]">
+        <Button size="small" @click="add">Add new</Button> <Button size="xsmall" icon-color="primary" icon="sync-outline" @click="getAll" title="Update"></Button>
+      
       </div>
-      <Grid>
+      </div>
+      <Grid v-if="isLoading">
+        <AccountItemLoading v-for="i in 4" :key="i" />
+      </Grid>
+      
+      <Grid v-else-if="accounts.length">
         <AccountItem v-for="account in accounts" :account="account" :key="account.id" @remove="remove" />
       </Grid>
-    </template>
-    <template v-else>
-      <div :class="spaceSprinkles({ marginBottom: 'small' })">
-        <Heading>Accounts</Heading>
+      <div :class="flexSprinkles({ display: 'flex', alignItems: 'center', justifyContent: 'center' })" v-else>
+        <span>Empty</span>
       </div>
-      <div :class="flexSprinkles({ display: 'flex', alignItems: 'center', justifyContent: 'center' })">
-        <Button @click="add">Add new</Button>
-      </div>
-    </template>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { Box, Button, Dropdown, DropdownItem, AccountItem, Card, Grid, Heading } from '@/components'
+import { Box, Button, Dropdown, DropdownItem, AccountItem, Card, Grid, Heading, AccountItemLoading } from '@/components'
 
 import section from '@/styles/section.css'
 import { centerCss } from '../styles/common.css'
@@ -37,21 +38,31 @@ import { Account } from '../types/account'
 const categories = ['All', 'Passwords', 'Notes']
 
 const activeCategory = ref('All')
+const isLoading = ref(true)
 const modal = useModal()
 
-const accounts = ref<Account[]>()
+const accounts = ref<Account[]>([])
 
 const add = () => {
   modal.open(ModalAdd, {
     successCallback: (val) => {
-      console.log(val);
-      console.log('success cb');
+      modal.close()
+      getAll()
     }
   })
 }
 
 const getAll = async () => {
-  accounts.value = await PasswordManager.getAll()
+  try {
+    isLoading.value = true
+    accounts.value = await PasswordManager.getAll()
+
+  } catch (error) {
+
+  } finally {
+    isLoading.value = false
+
+  }
 }
 
 const remove = async (id: string) => {

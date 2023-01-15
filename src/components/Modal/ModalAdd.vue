@@ -1,5 +1,5 @@
 <template>
-    <Heading size="medium" position="center" :class="spaceSprinkles({ marginBottom: 'medium' })">Add new password</Heading>
+    <Heading size="medium" position="center" :class="spaceSprinkles({ marginBottom: 'medium' })">Add new account</Heading>
     <Form>
         <template #inputs>
             <Input :status="$v.siteName.$error ? 'error' : 'neutral'" placeholder="Site name" v-model="siteName">
@@ -48,12 +48,15 @@ import Button from '../Button/Button.vue';
 import passwordManager from '../../services/password-manager';
 import { useVuelidate } from '@vuelidate/core'
 import { required } from '@vuelidate/validators'
+import { useMainStore } from '../../store/main';
 const props = defineProps({
     successCallback: {
         type: Function,
         default: () => { }
     }
 })
+
+const { setGlobalLoading } = useMainStore()
 
 const siteName = ref('')
 const login = ref('')
@@ -69,9 +72,11 @@ const rules = {
 const $v = useVuelidate(rules, { siteName, login, password })
 
 const enter = async () => {
+    setGlobalLoading(true)
     await $v.value.$validate()
     if ($v.value.$error) return
     await passwordManager.add({ siteName: siteName.value, login: login.value, password: password.value })
+    setGlobalLoading(false)
     props.successCallback({ siteName, login, password })
 }
 </script>

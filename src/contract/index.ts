@@ -1,5 +1,5 @@
 export default {
-  address: '0xa28A9d2d744c4Be5Eeb47206305Ddad6e4dafcFD',
+  address: import.meta.env.VITE_CONTRACT_ADDRESS,
   abi: [
     {
       anonymous: false,
